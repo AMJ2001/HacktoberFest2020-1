@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    struct node *next;
+    int data;
+};
+struct node *head;
+
+void create() //Creates if null or adds new node 
+{
+  struct node* nu = (struct node*) malloc(sizeof(struct node));
+  printf("Enter value :");
+  scanf("%d",&(nu->data));
+  if(head == NULL)
+  {
+  head = nu;
+  head->next = NULL;
+  }
+  else
+  {
+    struct node* temp;
+    temp = head;
+    while(temp->next!= NULL)
+    {
+      temp = temp->next;
+    }
+    temp->next = nu;
+    (temp->next)->next = NULL;
+  }
+}
+
+
+void traverse()
+{
+  struct node* temp;
+  temp = head;
+  printf("The linked list is :");
+  while(temp!= NULL)
+  {
+    printf("%d  ", temp->data );
+    temp = temp->next;
+  }
+}
+
+void delete()
+{
+  int d;
+  printf("What?\n");
+  scanf("%d", &d );
+  struct node* temp;
+  struct node* prev;
+  temp = head;
+
+  while(temp->data != d)
+  {
+    prev = temp;
+    temp = temp->next;
+  }
+  prev->next = temp->next;
+
+}
+
+int main()
+{
+  char x;
+  while (1){
+  scanf("%s", &x );
+  if (x == 'x')
+     {
+       break;
+     }
+  create();
+  }
+  traverse();
+  printf("To delete something, type 'y' \n");
+  scanf("%s", &x );
+  if(x == 'y')
+  {
+    delete();
+    traverse();
+  }
+
+}
